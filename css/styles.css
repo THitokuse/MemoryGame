@@ -10,6 +10,7 @@ body {
   width: 50px;
   height: 70px;
   transition: 0.8s;
+  position: relative;
 }
 
 .card-front,
@@ -19,6 +20,9 @@ body {
   text-align: center;
   line-height: 70px;
   border-radius: 8px;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .card-back {
@@ -29,8 +33,9 @@ body {
 .card-front {
   background: #fff;
   color: #f1c40f;
+  transform: rotateY(180deg);
 }
 
-.card-front:active {
+.card:active {
   transform: rotateY(180deg);
 }
