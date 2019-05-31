@@ -2,12 +2,18 @@
   'use strict';
 
   const pairs = 2;
+  const cards = [];
 
   function init() {
     let i;
+    let card;
     for (i = 1; i <= pairs; i++) {
-      document.getElementById('stage').appendChild(createCard(i));
-      document.getElementById('stage').appendChild(createCard(i));
+      cards.push(createCard(i));
+      cards.push(createCard(i));
+    }
+    while (cards.length) {
+      card = cards.splice(Math.floor(Math.random() * cards.length), 1)[0];
+      document.getElementById('stage').appendChild(card);
     }
   }
 
