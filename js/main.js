@@ -49,7 +49,19 @@
       firstCard = card;
     } else {
       secondCard = card;
+      secondCard.addEventListener('transitionend', check);
     }
+  }
+
+  function check() {
+    if (firstCard.children[0].textContent !==
+      secondCard.children[0].textContent) {
+      firstCard.className = 'card';
+      secondCard.className = 'card';
+    }
+    secondCard.removeEventListener('transitionend', check);
+    firstCard = null;
+    secondCard = null;
   }
 
   init();
