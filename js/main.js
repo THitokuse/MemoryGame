@@ -9,6 +9,9 @@
   let secondCard = null;
 
   let startTime;
+  let isRunning = false;
+  let correctCount = 0;
+  let timeoutId;
 
   function init() {
     let i;
@@ -34,6 +37,10 @@
     card.className = 'card';
     card.addEventListener('click', function() {
       flipCard(this);
+      if (isRunning === true) {
+        return;
+      }
+      isRunning = true;
       startTime = Date.now();
       runTimer();
     });
@@ -59,9 +66,15 @@
 
   function check() {
     if (firstCard.children[0].textContent !==
-      secondCard.children[0].textContent) {
+      secondCard.children[0].textContent
+    ) {
       firstCard.className = 'card';
       secondCard.className = 'card';
+    } else {
+      correctCount++;
+      if (correctCount === pairs) {
+        clearTimeout(timeoutId);
+      }
     }
     secondCard.removeEventListener('transitionend', check);
     firstCard = null;
@@ -70,7 +83,7 @@
 
   function runTimer() {
     document.getElementById('score').textContent = ((Date.now() - startTime) / 1000).toFixed(2);
-    setTimeout(function() {
+    timeoutId = setTimeout(function() {
       runTimer();
     }, 10);
   }
