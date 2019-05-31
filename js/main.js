@@ -8,6 +8,8 @@
   let firstCard = null;
   let secondCard = null;
 
+  let startTime;
+
   function init() {
     let i;
     let card;
@@ -32,6 +34,8 @@
     card.className = 'card';
     card.addEventListener('click', function() {
       flipCard(this);
+      startTime = Date.now();
+      runTimer();
     });
     container = document.createElement('div');
     container.className = 'card-container';
@@ -62,6 +66,13 @@
     secondCard.removeEventListener('transitionend', check);
     firstCard = null;
     secondCard = null;
+  }
+
+  function runTimer() {
+    document.getElementById('score').textContent = ((Date.now() - startTime) / 1000).toFixed(2);
+    setTimeout(function() {
+      runTimer();
+    }, 10);
   }
 
   init();
