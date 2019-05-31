@@ -43,6 +43,7 @@
       isRunning = true;
       startTime = Date.now();
       runTimer();
+      document.getElementById('restart').className = '';
     });
     container = document.createElement('div');
     container.className = 'card-container';
@@ -52,6 +53,9 @@
 
   function flipCard(card) {
     if (firstCard !== null && secondCard !== null) {
+      return;
+    }
+    if (card.className.indexOf('open') !== -1) {
       return;
     }
     card.className = 'card open';
