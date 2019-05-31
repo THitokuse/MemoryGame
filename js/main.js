@@ -4,6 +4,10 @@
   const pairs = 2;
   const cards = [];
 
+  let flipCount = 0;
+  let firstCard = null;
+  let secondCard = null;
+
   function init() {
     let i;
     let card;
@@ -27,12 +31,25 @@
     card.innerHTML = inner;
     card.className = 'card';
     card.addEventListener('click', function() {
-      card.className = 'card open';
+      flipCard(this);
     });
     container = document.createElement('div');
     container.className = 'card-container';
     container.appendChild(card);
     return container;
+  }
+
+  function flipCard(card) {
+    if (firstCard !== null && secondCard !== null) {
+      return;
+    }
+    card.className = 'card open';
+    flipCount++;
+    if (flipCount % 2 === 1) {
+      firstCard = card;
+    } else {
+      secondCard = card;
+    }
   }
 
   init();
